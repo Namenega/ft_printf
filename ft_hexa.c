@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hexa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathan <Nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:57:54 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/19 15:45:42 by Nathan           ###   ########.fr       */
+/*   Updated: 2020/02/26 14:46:03 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ static void	ft_minus1(t_flag flag, long n, int j, char *base)
 	if (flag.prec < ft_hex(n) && flag.prec != -1)
 	{
 		ft_putnbrbase(n, base, ft_hex(n), flag);
-		while (++i < flag.width - ft_hex(n))
-			ft_putchar(' ');
+		ft_space(flag, ft_hex(n), 0);
 	}
 	else
-		while (++i < flag.width - j)
-			ft_putchar(' ');
+		ft_space(flag, j, 0);
 }
 
 static void	ft_minus0_zero0(t_flag flag, long n, int j, char *base)
@@ -41,13 +39,11 @@ static void	ft_minus0_zero0(t_flag flag, long n, int j, char *base)
 		ft_putnbrbase(n, base, ft_hex(n), flag);
 	if (flag.prec < ft_hex(n) && flag.prec != -1)
 	{
-		while (++i < flag.width - ft_hex(n))
-			ft_putchar(' ');
+		ft_space(flag, ft_hex(n), 0);
 		ft_putnbrbase(n, base, ft_hex(n), flag);
 	}
 	else
-		while (++i < flag.width - j)
-			ft_putchar(' ');
+		ft_space(flag, j, 0);
 }
 
 static void	ft_minus0_zero1(t_flag flag, long n, int j, char *base)
@@ -60,16 +56,13 @@ static void	ft_minus0_zero1(t_flag flag, long n, int j, char *base)
 		ft_putnbrbase(n, base, ft_hex(n), flag);
 	if (flag.prec < ft_hex(n) && flag.prec != -1)
 	{
-		while (++i < flag.width - ft_hex(n))
-			ft_putchar(' ');
+		ft_space(flag, ft_hex(n), 0);
 		ft_putnbrbase(n, base, ft_hex(n), flag);
 	}
 	else if (flag.prec != -1)
-		while (++i < flag.width - j)
-			ft_putchar(' ');
+		ft_space(flag, j, 0);
 	else if (flag.width > flag.prec && flag.prec != -1)
-		while (++i < flag.width - j - 1)
-			ft_putchar(' ');
+		ft_space(flag, j, 1);
 }
 
 t_flag		ft_hexa(t_flag flag, va_list ap, char c)
@@ -83,7 +76,7 @@ t_flag		ft_hexa(t_flag flag, va_list ap, char c)
 	j = (flag.prec >= ft_hex(n)) ? flag.prec : ft_hex(n);
 	if (n == 0 && flag.prec == 0)
 	{
-		ft_space(flag);
+		ft_space(flag, 0, 0);
 		flag.length += flag.width;
 		return (flag);
 	}
@@ -94,7 +87,7 @@ t_flag		ft_hexa(t_flag flag, va_list ap, char c)
 	if (flag.minus == 0 && flag.prec == 1)
 		ft_minus0_zero1(flag, n, j, base);
 	if (flag.prec >= ft_hex(n) && flag.width < ft_hex(n))
-		ft_putnbr_base(n, base, ft_hex(n), flag);
+		ft_putnbrbase(n, base, ft_hex(n), flag);
 	flag.length += (j > flag.width) ? j : flag.width;
 	return (flag);
 }

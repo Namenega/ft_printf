@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathan <Nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:49:39 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/19 15:50:19 by Nathan           ###   ########.fr       */
+/*   Updated: 2020/02/24 16:35:35 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int			ft_hex(unsigned long int n)
 	return (1);
 }
 
-void		ft_space(t_flag flag)
+void		ft_space(t_flag flag, int n, int m)
 {
 	int		i;
 
 	i = -1;
-	while (++i < flag.width)
+	while (++i < flag.width - n - m)
 		ft_putchar(' ');
 }
 

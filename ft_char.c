@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathan <Nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 16:18:54 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/18 16:27:18 by Nathan           ###   ########.fr       */
+/*   Updated: 2020/02/24 16:36:39 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.c"
+#include "ft_printf.h"
 
 t_flag		ft_char(t_flag flag, va_list ap)
 {
@@ -22,13 +22,11 @@ t_flag		ft_char(t_flag flag, va_list ap)
 	if (flag.minus == 1 && flag.width != 1)
 	{
 		ft_putchar(va_arg(ap, int));
-		while (++i < flag.width - 1)
-			ft_putchar(' ');
+		ft_space(flag, 1, 0);
 	}
 	else if (flag.minus == 0 && flag.width != 1)
 	{
-		while (++i < flag.width - 1)
-			ft_putchar(' ');
+		ft_space(flag, 1, 0);
 		ft_putchar(va_arg(ap, int));
 	}
 	flag.length += flag.width == 0 ? 1 : flag.width;

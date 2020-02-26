@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathan <Nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 17:34:45 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/19 14:17:04 by Nathan           ###   ########.fr       */
+/*   Updated: 2020/02/24 16:39:03 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		ft_l(char *s)
 	return (i);
 }
 
-static t_flag	ft_stringlength(t_flags flag, char *s)
+static t_flag	ft_stringlength(t_flag flag, char *s)
 {
 	if (flag.prec == -1 && flag.width > 0 && s)
 		flag.length += flag.width > ft_l(s) ? flag.width : ft_l(s);
@@ -53,15 +53,11 @@ static void		ft_minus0(t_flag flag, char *s)
 	i = -1;
 	if (flag.prec < ft_l(s) && flag.prec != -1)
 	{
-		while (++i < flag.width - flag.prec)
-			ft_putchar(' ');
+		ft_space(flag, flag.prec, 0);
 		ft_putstrn(s, flag.prec);
 	}
 	else
-	{
-		while (++i < flag.width - ft_l(s))
-			ft_putchar(' ');
-	}
+		ft_space(flag, ft_l(s), 0);
 	if ((flag.prec == -1) ||
 		(flag.width > ft_l(s) && flag.prec >= ft_l(s)))
 		ft_putstr(s);
@@ -78,29 +74,25 @@ static void		ft_minus1(t_flag flag, char *s)
 	if (flag.prec < ft_l(s) && flag.prec != -1)
 	{
 		ft_putstrn(s, flag.prec);
-		while (++i < flag.width - flag.prec)
-			ft_putchar(' ');
+		ft_space(flag, flag.prec, 0);
 	}
 	else
-	{
-		while (++i < flag.width - ft_l(s))
-			ft_putchar(' ');
-	}
+		ft_space(flag, ft_l(s), 0);
 }
 
 t_flag			ft_string(t_flag flag, va_list ap)
 {
-	char	*str;
+	char	*s;
 
-	str = va_arg(ap, void *)
-	if (!str)
-		str = "(null)";
-	if (flag.minus == 1 && str)
-		ft_minus1(flag, str);
-	if (flag.minus == 0 && str)
-		ft_minus0(flag, str);
-	if (flag.prec >= ft_l(str) && flag.width <= ft_l(str))
-		ft_putstr(str);
-	flag = ft_stringlength(flag, str);
+	s = va_arg(ap, void *);
+	if (!s)
+		s = "(null)";
+	if (flag.minus == 1 && s)
+		ft_minus1(flag, s);
+	if (flag.minus == 0 && s)
+		ft_minus0(flag, s);
+	if (flag.prec >= ft_l(s) && flag.width <= ft_l(s))
+		ft_putstr(s);
+	flag = ft_stringlength(flag, s);
 	return (flag);
 }

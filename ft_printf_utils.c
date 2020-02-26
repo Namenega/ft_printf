@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathan <Nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:14:06 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/19 15:49:18 by Nathan           ###   ########.fr       */
+/*   Updated: 2020/02/24 16:04:21 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ void		ft_putstr(char *s)
 
 	i = 0;
 	if (!s)
-		return (0);
-	while (s[i] != '\0')
+		return ;
+	while (s[i])
 	{
 		ft_putchar(s[i]);
 		i++;
 	}
 }
 
-void 		ft_putstrn(char *s, int n)
+void		ft_putstrn(char *s, int n)
 {
 	int		i;
 
 	i = 0;
 	if (!s)
-		return (0);
-	while (s[i] != '\0'&& i < n)
+		return ;
+	while (s[i] && i < n)
 	{
 		ft_putchar(s[i]);
 		i++;

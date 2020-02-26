@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathan <Nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:04:33 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/19 15:37:42 by Nathan           ###   ########.fr       */
+/*   Updated: 2020/02/20 15:36:23 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include "ft_printf.h"
 
 static int		ft_newatoi(char *s)
 {
@@ -19,7 +19,6 @@ static int		ft_newatoi(char *s)
 
 	i = 0;
 	res = 0;
-
 	while (s[i] >= '0' && s[i] <= '9')
 	{
 		res = res * 10 + (s[i] - '0');
@@ -32,7 +31,7 @@ static int		ft_newatoi(char *s)
 
 static t_flag	ft_flag_analyze(char *s, t_flag flag, va_list ap)
 {
-	while (s[++flag.i] == '-' || s[flag.i == '0'])
+	while (s[++flag.i] == '-' || s[flag.i] == '0')
 	{
 		if (s[flag.i] == '-')
 			flag.minus = 1;
@@ -45,7 +44,8 @@ static t_flag	ft_flag_analyze(char *s, t_flag flag, va_list ap)
 	while (ft_isdigit(s[flag.i]) || s[flag.i] == '*')
 		flag.i++;
 	if (s[flag.i] == '.')
-		flag.prec = (s[flag.i + 1] = '*') ? va_arg(ap, int) : ft_newatoi(s + flag.i +1);
+		flag.prec = (s[flag.i + 1] == '*') ? va_arg(ap, int) :
+			ft_newatoi(s + flag.i + 1);
 	flag = ft_check_width_prec(flag);
 	while (ft_isdigit(s[flag.i]) || s[flag.i] == '*' || s[flag.i] == '.')
 		flag.i++;
@@ -60,15 +60,15 @@ static t_flag	ft_analyzer(const char *s, t_flag flag, va_list ap)
 		flag = ft_percent(flag);
 	if (s[flag.i] == 'c')
 		flag = ft_char(flag, ap);
-	if (s[flag.i] == 'd' || s[flag.i] == 'i')
-		flag = ft_int(flag, ap);
 	if (s[flag.i] == 's')
 		flag = ft_string(flag, ap);
+	if (s[flag.i] == 'd' || s[flag.i] == 'i')
+		flag = ft_int(flag, ap);
 	if (s[flag.i] == 'u')
 		flag = ft_unsignedint(flag, ap);
 	if (s[flag.i] == 'x' || s[flag.i] == 'X')
 		flag = ft_hexa(flag, ap, s[flag.i]);
-	if (s[flag.i] = 'p')
+	if (s[flag.i] == 'p')
 		flag = ft_pointer(flag, ap);
 	flag.minus = 0;
 	flag.zero = 0;
@@ -87,7 +87,7 @@ static t_flag	ft_initialize(void)
 	flag.prec = -1;
 	flag.i = 0;
 	flag.length = 0;
-	return(flag);
+	return (flag);
 }
 
 int				ft_printf(const char *s, ...)
@@ -97,7 +97,7 @@ int				ft_printf(const char *s, ...)
 
 	va_start(ap, s);
 	flag = ft_initialize();
-	while (s[flag.i] != '\0')
+	while (s[flag.i])
 	{
 		while (s[flag.i] && s[flag.i] != '%')
 		{

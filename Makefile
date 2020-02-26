@@ -4,7 +4,7 @@ SRCNAME	= 	ft_printf.c 		\
 			ft_int.c 			\
 			ft_percent.c 		\
 			ft_pointer.c 		\
-			ft_printf_utils. 	\
+			ft_printf_utils.c	\
 			ft_printf_utils2.c	\
 			ft_string.c			\
 			ft_unsignedint.c	\
