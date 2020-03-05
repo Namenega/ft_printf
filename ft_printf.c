@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:04:33 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/20 15:36:23 by namenega         ###   ########.fr       */
+/*   Updated: 2020/03/02 16:55:08 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static t_flag	ft_flag_analyze(char *s, t_flag flag, va_list ap)
 	if (flag.minus == 1)
 		flag.zero = 0;
 	flag.width = (s[flag.i] == '*') ? va_arg(ap, int) : ft_newatoi(s + flag.i);
+	if (flag.width < 0)
+		flag.minus = 1;
 	while (ft_isdigit(s[flag.i]) || s[flag.i] == '*')
 		flag.i++;
 	if (s[flag.i] == '.')

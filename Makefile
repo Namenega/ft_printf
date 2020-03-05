@@ -12,15 +12,16 @@ SRCNAME	= 	ft_printf.c 		\
 SRCS	= ${SRCNAME}
 
 OBJS	= ${SRCS:.c=.o}
-BOBJ    = ${BSRC:.c=.o}
 
 NAME	= libftprintf.a
 
 CC	= gcc
 RM	= rm -f
 
+CFLAGS = -Wall -Wextra -Werror
+
 .c.o:
-			${CC} -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
 			ar rc ${NAME} ${OBJS}
@@ -28,7 +29,7 @@ ${NAME}:	${OBJS}
 all: 		${NAME}
 
 clean:
-			${RM} ${OBJS} ${BOBJ}
+			${RM} ${OBJS}
 
 fclean:		clean
 			${RM} ${NAME}

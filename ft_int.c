@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 16:27:56 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/25 11:58:07 by namenega         ###   ########.fr       */
+/*   Updated: 2020/02/27 15:44:38 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ static void	ft_minus0_zero1(t_flag flag, int n, int j)
 	int		i;
 
 	i = -1;
-	if ((flag.prec == -1) ||
-		(flag.width > ft_len(n) && flag.prec >= ft_len(n)))
-		ft_putnbr(n, flag.prec, ft_len(n), flag);
 	if (flag.prec != -1 && flag.prec < ft_len(n))
 	{
 		ft_space(flag, ft_len(n), 0);
@@ -30,6 +27,9 @@ static void	ft_minus0_zero1(t_flag flag, int n, int j)
 		ft_space(flag, j, 0);
 	else if (flag.width > flag.prec && flag.prec != -1)
 		ft_space(flag, j, 1);
+	if ((flag.prec == -1) ||
+		(flag.width > ft_len(n) && flag.prec >= ft_len(n)))
+		ft_putnbr(n, flag.prec, ft_len(n), flag);
 }
 
 static void	ft_minus0_zero0(t_flag flag, int n, int j)
@@ -37,9 +37,6 @@ static void	ft_minus0_zero0(t_flag flag, int n, int j)
 	int		i;
 
 	i = -1;
-	if ((flag.prec == -1) ||
-		(flag.width > ft_len(n) && flag.prec >= ft_len(n)))
-		ft_putnbr(n, flag.prec, ft_len(n), flag);
 	if (flag.prec < ft_len(n) && flag.prec != -1)
 	{
 		ft_space(flag, ft_len(n), 0);
@@ -49,6 +46,9 @@ static void	ft_minus0_zero0(t_flag flag, int n, int j)
 		ft_space(flag, j, 0);
 	else
 		ft_space(flag, j, 1);
+	if ((flag.prec == -1) ||
+		(flag.width > ft_len(n) && flag.prec >= ft_len(n)))
+		ft_putnbr(n, flag.prec, ft_len(n), flag);
 }
 
 static void	ft_minus1(t_flag flag, int len, int n, int j)
@@ -90,7 +90,7 @@ t_flag		ft_int(t_flag flag, va_list ap)
 	j = (flag.prec >= ft_len(n)) ? flag.prec : ft_len(n);
 	if (n == 0 && flag.prec == 0)
 	{
-		ft_space(flag, 1, 0);
+		ft_space(flag, 0, 0);
 		flag.length += flag.width;
 		return (flag);
 	}

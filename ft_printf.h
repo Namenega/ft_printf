@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 14:59:19 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/24 16:35:43 by namenega         ###   ########.fr       */
+/*   Updated: 2020/03/05 13:49:59 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <stdio.h>
+
+# define BASE "0123456789abcdef"
 
 typedef struct	s_flag
 {

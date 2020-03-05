@@ -6,7 +6,7 @@
 /*   By: namenega <namenega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:57:54 by Nathan            #+#    #+#             */
-/*   Updated: 2020/02/26 14:46:03 by namenega         ###   ########.fr       */
+/*   Updated: 2020/02/27 15:40:55 by namenega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ static void	ft_minus0_zero0(t_flag flag, long n, int j, char *base)
 	int		i;
 
 	i = -1;
-	if (flag.prec == -1 ||
-		(flag.width >= ft_hex(n) && flag.prec >= ft_hex(n)))
-		ft_putnbrbase(n, base, ft_hex(n), flag);
 	if (flag.prec < ft_hex(n) && flag.prec != -1)
 	{
 		ft_space(flag, ft_hex(n), 0);
@@ -44,6 +41,9 @@ static void	ft_minus0_zero0(t_flag flag, long n, int j, char *base)
 	}
 	else
 		ft_space(flag, j, 0);
+	if (flag.prec == -1 ||
+		(flag.width >= ft_hex(n) && flag.prec >= ft_hex(n)))
+		ft_putnbrbase(n, base, ft_hex(n), flag);
 }
 
 static void	ft_minus0_zero1(t_flag flag, long n, int j, char *base)
@@ -51,9 +51,6 @@ static void	ft_minus0_zero1(t_flag flag, long n, int j, char *base)
 	int		i;
 
 	i = -1;
-	if (flag.prec == -1 ||
-		(flag.width >= ft_hex(n) && flag.prec >= ft_hex(n)))
-		ft_putnbrbase(n, base, ft_hex(n), flag);
 	if (flag.prec < ft_hex(n) && flag.prec != -1)
 	{
 		ft_space(flag, ft_hex(n), 0);
@@ -63,6 +60,9 @@ static void	ft_minus0_zero1(t_flag flag, long n, int j, char *base)
 		ft_space(flag, j, 0);
 	else if (flag.width > flag.prec && flag.prec != -1)
 		ft_space(flag, j, 1);
+	if (flag.prec == -1 ||
+		(flag.width >= ft_hex(n) && flag.prec >= ft_hex(n)))
+		ft_putnbrbase(n, base, ft_hex(n), flag);
 }
 
 t_flag		ft_hexa(t_flag flag, va_list ap, char c)
@@ -84,7 +84,7 @@ t_flag		ft_hexa(t_flag flag, va_list ap, char c)
 		ft_minus1(flag, n, j, base);
 	if (flag.minus == 0 && flag.zero == 0)
 		ft_minus0_zero0(flag, n, j, base);
-	if (flag.minus == 0 && flag.prec == 1)
+	if (flag.minus == 0 && flag.zero == 1)
 		ft_minus0_zero1(flag, n, j, base);
 	if (flag.prec >= ft_hex(n) && flag.width < ft_hex(n))
 		ft_putnbrbase(n, base, ft_hex(n), flag);
